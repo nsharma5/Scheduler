@@ -1,23 +1,28 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
 
-export default function App() {
+const schedule = {
+  title: "CS Courses for 2020-2021",
+};
+
+const App = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.textStyle}>Welcome to my app!</Text>
+      <Text style={styles.bannerStyle}>{schedule.title}</Text>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#00f',
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
-  textStyle: {
-    color: '#fff',
+  bannerStyle: {
+    color: "#888",
     fontSize: 32,
-  }
+  },
 });
+
+export default App;
