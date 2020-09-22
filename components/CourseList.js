@@ -1,17 +1,32 @@
+import React, { useState } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 
 import Course from './Course';
-import React from 'react';
+import TermSelector from './TermSelector';
 
-const CourseList = ({ courses }) => (
-  <ScrollView>
-    <View style={styles.courseList}>
-      {courses.map((course) => (
+const CourseList = ({ courses }) => {
+  const [selectedTerm, setSelectedTerm] = useState('Fall');
+
+  const termMap = { F: 'Fall', W: 'Winter', S: 'Spring' };
+  const terms = Object.values(termMap);
+  const getCourseTerm = (course) => termMap[course.id.charAt(0)];
+
+  const termCourses = courses.filter(
+    (course) => selectedTerm === getCourseTerm(course)
+  );
+
+  return (
+    <ScrollView contentContainerStyle={styles.courseList}>
+      <TermSelector
+        selectedTerm={selectedTerm}
+        setSelectedTerm={setSelectedTerm}
+      />
+      {termCourses.map((course) => (
         <Course key={course.id} course={course} />
       ))}
-    </View>
-  </ScrollView>
-);
+    </ScrollView>
+  );
+};
 
 const styles = StyleSheet.create({
   courseList: {
